@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
 {
     label = new QLabel(this);
     ui->setupUi(this);
@@ -13,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete label;
+    delete webPage;
     delete ui;
 }
 
@@ -21,8 +21,6 @@ void MainWindow::update_WEB_page()
     changed_after_saving = true;
     label->clear();
     label->setText("Changes unsaved.");
-
-
     auto HTMLdata = textEdit->toPlainText();
     webPage->setHtml(HTMLdata);
 }
